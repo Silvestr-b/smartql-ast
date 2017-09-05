@@ -4,6 +4,7 @@
   "description": "Abstract Syntax Tree of SmartQL",
   "main": "lib/index.js",
   "scripts": {
+    "postinstall": "tsc",
     "start": "node ./lib/index.js",
     "test": "tsc && mocha ./lib/tests/index.js",
     "devtest": "mocha ./lib/tests/index.js"
