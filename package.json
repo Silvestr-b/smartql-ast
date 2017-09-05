@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Abstract Syntax Tree of SmartQL",
   "main": "lib/index.js",
+  "types": "./lib/index.d.ts",
   "scripts": {
     "postinstall": "tsc",
     "start": "node ./lib/index.js",
