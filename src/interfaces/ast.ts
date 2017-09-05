@@ -1,7 +1,7 @@
 
 // Factory
 
-interface IASTFactory {
+export interface IASTFactory {
 	createOperator: (type: OperatorType) => IOperator
 	createExpression: (operator: IOperator, value: IValue) => IExpression
 	createField: (name: string) => IField
@@ -17,7 +17,7 @@ interface IASTFactory {
 
 // Entities 
 
-interface IAstNode {
+export interface IAstNode {
 	parent: IAstNode;
 	type: string;
 
@@ -27,7 +27,7 @@ interface IAstNode {
 	getType: () => string
 }
 
-interface IQuery extends IAstNode {
+export interface IQuery extends IAstNode {
 	resources: IResource[]
 	method: string;
 	setMethod: (method: string) => IQuery
@@ -39,7 +39,7 @@ interface IQuery extends IAstNode {
 	forEachResource: (callBack: ((resource: IResource) => void)) => void
 }
 
-interface IResource extends IAstNode {
+export interface IResource extends IAstNode {
 	name: string
 	fields: IField[]
 	predicates: IPredicate[]
@@ -64,25 +64,25 @@ interface IResource extends IAstNode {
 	forEachInclusion: (callBack: ((inclusionName: string, resource: IResource) => void)) => void
 }
 
-interface IPredicate extends IAstNode {
+export interface IPredicate extends IAstNode {
 	fieldPredicates: FieldPredicatesList
 	addFieldPredicate: (fieldName: string, subPredicate: SubPredicate) => IPredicate
 	getFieldPredicate: (fieldName: string) => SubPredicate
 }
 
-interface IConjunction extends IAstNode {
+export interface IConjunction extends IAstNode {
 	operands: IExpression[]
 	addOperand: (operand: IExpression) => IConjunction
 	getOperands: () => IExpression[]
 }
 
-interface IDisjunction extends IAstNode {
+export interface IDisjunction extends IAstNode {
 	operands: (IValue | IConjunction)[]
 	addOperand: (operand: (IValue | IConjunction)) => IDisjunction
 	getOperands: () => (IValue | IConjunction)[]
 }
 
-interface ISubquery extends IAstNode {
+export interface ISubquery extends IAstNode {
 	field: string
 	resource: IResource
 	getField: () => string
@@ -90,22 +90,22 @@ interface ISubquery extends IAstNode {
 }
 
 
-interface IField extends IAstNode {
+export interface IField extends IAstNode {
 	name: string
 	getName: () => string
 }
 
-interface IValue extends IAstNode {
+export interface IValue extends IAstNode {
 	value: ValuesType
 	getValue: () => ValuesType
 }
 
-interface IOperator extends IAstNode {
+export interface IOperator extends IAstNode {
 	value: OperatorType
 	getValue: () => OperatorType
 }
 
-interface IExpression extends IAstNode {
+export interface IExpression extends IAstNode {
 	operator: IOperator
 	value: IValue
 	getOperator: () => IOperator
@@ -115,33 +115,15 @@ interface IExpression extends IAstNode {
 
 // Types
 
-type OperatorType = '>' | '<' | '>=' | '<=' | '=' | '!='	
+export type OperatorType = '>' | '<' | '>=' | '<=' | '=' | '!='	
 
-type ValuesType = string | number | Date | ISubquery
+export type ValuesType = string | number | Date | ISubquery
 
-type InclusionsList = { [inclusionName: string]: IResource }
+export type InclusionsList = { [inclusionName: string]: IResource }
 
-type SubPredicate = IConjunction | IDisjunction | IValue
+export type SubPredicate = IConjunction | IDisjunction | IValue
 
-type FieldPredicatesList = { [fieldName: string]: SubPredicate }
+export type FieldPredicatesList = { [fieldName: string]: SubPredicate }
 
 
-export {
-	IAstNode,
-	IQuery, 
-	IResource, 
-	IPredicate, 
-	IConjunction, 
-	IDisjunction, 
-	ISubquery, 
-	IField, 
-	IValue, 
-	IOperator, 
-	IExpression, 
-	OperatorType,
-	ValuesType,
-	InclusionsList,
-	FieldPredicatesList,
-	SubPredicate,
-	IASTFactory
-}
+
