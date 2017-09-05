@@ -2,5 +2,5 @@ import { ASTFactory } from './implementations/factory'
 
 
 export default () => {
-	return new ASTFactory()
+	return new ASTFactory();
 }
